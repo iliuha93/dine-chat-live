@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { UtensilsCrossed } from "lucide-react";
+import { UtensilsCrossed, Sparkles } from "lucide-react";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -9,39 +9,80 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background px-6">
-      <div className="w-full max-w-sm flex flex-col items-center gap-8">
+    <div className="relative flex min-h-screen flex-col items-center justify-center bg-background px-6 overflow-hidden">
+      {/* Ambient orbs */}
+      <div className="ambient-orb w-72 h-72 bg-primary top-[-5%] left-[-10%]" />
+      <div className="ambient-orb w-96 h-96 bg-primary bottom-[-15%] right-[-15%]" />
+      <div className="ambient-orb w-48 h-48 bg-destructive top-[60%] left-[10%] opacity-[0.06]" />
+
+      {/* Decorative lines */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-t from-transparent via-primary/20 to-transparent" />
+
+      <div className="relative z-10 w-full max-w-sm flex flex-col items-center gap-10">
         {/* Logo */}
-        <div className="flex flex-col items-center gap-3 animate-fade-up">
-          <div className="w-20 h-20 rounded-full gold-gradient flex items-center justify-center shadow-lg">
-            <UtensilsCrossed className="w-10 h-10 text-primary-foreground" />
+        <div className="flex flex-col items-center gap-4 animate-fade-up">
+          <div className="relative">
+            <div className="w-24 h-24 rounded-full gold-gradient flex items-center justify-center shadow-xl glow-pulse">
+              <UtensilsCrossed className="w-11 h-11 text-primary-foreground" />
+            </div>
+            <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-card border border-border flex items-center justify-center">
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
+            </div>
           </div>
-          <h1 className="text-3xl font-bold gold-text">La Maison</h1>
-          <p className="text-muted-foreground text-sm text-center">
-            Ваш персональный ресторанный ассистент
+          <div className="text-center space-y-1.5">
+            <h1 className="text-4xl font-bold gold-text tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
+              La Maison
+            </h1>
+            <p className="text-muted-foreground text-sm italic" style={{ fontFamily: "var(--font-elegant)" }}>
+              L'art de bien manger
+            </p>
+          </div>
+        </div>
+
+        {/* Greeting */}
+        <div className="animate-fade-up text-center space-y-1" style={{ animationDelay: "0.1s" }}>
+          <p className="text-foreground text-lg font-medium" style={{ fontFamily: "var(--font-elegant)" }}>
+            Добро пожаловать
+          </p>
+          <p className="text-muted-foreground text-xs">
+            Ваш персональный ресторанный ассистент с ИИ
           </p>
         </div>
 
         {/* Auth Buttons */}
-        <div className="w-full flex flex-col gap-3 animate-fade-up" style={{ animationDelay: "0.15s" }}>
+        <div className="w-full flex flex-col gap-3 animate-fade-up" style={{ animationDelay: "0.2s" }}>
           <button
             onClick={handleLogin}
-            className="w-full flex items-center justify-center gap-3 rounded-xl bg-card border border-border px-4 py-3.5 text-sm font-medium text-foreground transition-all hover:border-primary/40 active:scale-[0.98]"
+            className="group w-full flex items-center gap-3 rounded-2xl glass-card-strong px-5 py-4 text-sm font-medium text-foreground transition-all hover:border-primary/30 active:scale-[0.98] hover:shadow-lg hover:shadow-primary/5"
           >
-            <GoogleIcon />
-            Войти через Google
+            <div className="w-10 h-10 rounded-xl bg-card flex items-center justify-center border border-border group-hover:border-primary/20 transition-colors">
+              <GoogleIcon />
+            </div>
+            <div className="text-left">
+              <span className="block text-foreground text-sm font-medium">Войти через Google</span>
+              <span className="block text-muted-foreground text-[10px]">Быстрый и безопасный вход</span>
+            </div>
           </button>
 
           <button
             onClick={handleLogin}
-            className="w-full flex items-center justify-center gap-3 rounded-xl bg-card border border-border px-4 py-3.5 text-sm font-medium text-foreground transition-all hover:border-primary/40 active:scale-[0.98]"
+            className="group w-full flex items-center gap-3 rounded-2xl glass-card-strong px-5 py-4 text-sm font-medium text-foreground transition-all hover:border-primary/30 active:scale-[0.98] hover:shadow-lg hover:shadow-primary/5"
           >
-            <FacebookIcon />
-            Войти через Facebook
+            <div className="w-10 h-10 rounded-xl bg-card flex items-center justify-center border border-border group-hover:border-primary/20 transition-colors">
+              <FacebookIcon />
+            </div>
+            <div className="text-left">
+              <span className="block text-foreground text-sm font-medium">Войти через Facebook</span>
+              <span className="block text-muted-foreground text-[10px]">Используйте свой аккаунт</span>
+            </div>
           </button>
         </div>
 
-        <p className="text-muted-foreground text-xs text-center max-w-[260px] animate-fade-up" style={{ animationDelay: "0.3s" }}>
+        {/* Shimmer divider */}
+        <div className="w-full h-px shimmer animate-fade-up" style={{ animationDelay: "0.3s" }} />
+
+        <p className="text-muted-foreground text-[10px] text-center max-w-[240px] animate-fade-up leading-relaxed" style={{ animationDelay: "0.35s" }}>
           Входя, вы соглашаетесь с условиями использования и политикой конфиденциальности
         </p>
       </div>
