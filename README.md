@@ -1,8 +1,9 @@
-# Welcome to your Lovable project
+# Dine Chat Live
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**GitHub**: https://github.com/iliuha93/dine-chat-live  
+**Lovable**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 
 ## How can I edit this code?
 
