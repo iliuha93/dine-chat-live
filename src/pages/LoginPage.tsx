@@ -1,21 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import { UtensilsCrossed, Sparkles } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
-  const handleLogin = () => {
-    navigate("/chat");
-  };
+  const handleLogin = () => navigate("/chat");
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center bg-background px-6 overflow-hidden">
-      {/* Ambient orbs */}
       <div className="ambient-orb w-72 h-72 bg-primary top-[-5%] left-[-10%]" />
       <div className="ambient-orb w-96 h-96 bg-primary bottom-[-15%] right-[-15%]" />
       <div className="ambient-orb w-48 h-48 bg-destructive top-[60%] left-[10%] opacity-[0.06]" />
 
-      {/* Decorative lines */}
+      {/* Language switcher */}
+      <div className="absolute top-4 right-4 z-20">
+        <LanguageSwitcher />
+      </div>
+
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-t from-transparent via-primary/20 to-transparent" />
 
@@ -32,58 +36,52 @@ const LoginPage = () => {
           </div>
           <div className="text-center space-y-1.5">
             <h1 className="text-4xl font-bold gold-text tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
-              La Maison
+              {t.common.restaurant_name}
             </h1>
             <p className="text-muted-foreground text-sm italic" style={{ fontFamily: "var(--font-elegant)" }}>
-              L'art de bien manger
+              {t.common.slogan}
             </p>
           </div>
         </div>
 
-        {/* Greeting */}
         <div className="animate-fade-up text-center space-y-1" style={{ animationDelay: "0.1s" }}>
           <p className="text-foreground text-lg font-medium" style={{ fontFamily: "var(--font-elegant)" }}>
-            Добро пожаловать
+            {t.auth.welcome}
           </p>
-          <p className="text-muted-foreground text-xs">
-            Ваш персональный ресторанный ассистент с ИИ
-          </p>
+          <p className="text-muted-foreground text-xs">{t.auth.subtitle}</p>
         </div>
 
-        {/* Auth Buttons */}
         <div className="w-full flex flex-col gap-3 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-          <button
-            onClick={handleLogin}
-            className="group w-full flex items-center gap-3 rounded-2xl glass-card-strong px-5 py-4 text-sm font-medium text-foreground transition-all hover:border-primary/30 active:scale-[0.98] hover:shadow-lg hover:shadow-primary/5"
-          >
+          <button onClick={handleLogin} className="group w-full flex items-center gap-3 rounded-2xl glass-card-strong px-5 py-4 text-sm font-medium text-foreground transition-all hover:border-primary/30 active:scale-[0.98] hover:shadow-lg hover:shadow-primary/5">
             <div className="w-10 h-10 rounded-xl bg-card flex items-center justify-center border border-border group-hover:border-primary/20 transition-colors">
               <GoogleIcon />
             </div>
             <div className="text-left">
-              <span className="block text-foreground text-sm font-medium">Войти через Google</span>
-              <span className="block text-muted-foreground text-[10px]">Быстрый и безопасный вход</span>
+              <span className="block text-foreground text-sm font-medium">{t.auth.google_signin}</span>
+              <span className="block text-muted-foreground text-[10px]">{t.auth.google_desc}</span>
             </div>
           </button>
 
-          <button
-            onClick={handleLogin}
-            className="group w-full flex items-center gap-3 rounded-2xl glass-card-strong px-5 py-4 text-sm font-medium text-foreground transition-all hover:border-primary/30 active:scale-[0.98] hover:shadow-lg hover:shadow-primary/5"
-          >
+          <button onClick={handleLogin} className="group w-full flex items-center gap-3 rounded-2xl glass-card-strong px-5 py-4 text-sm font-medium text-foreground transition-all hover:border-primary/30 active:scale-[0.98] hover:shadow-lg hover:shadow-primary/5">
             <div className="w-10 h-10 rounded-xl bg-card flex items-center justify-center border border-border group-hover:border-primary/20 transition-colors">
               <FacebookIcon />
             </div>
             <div className="text-left">
-              <span className="block text-foreground text-sm font-medium">Войти через Facebook</span>
-              <span className="block text-muted-foreground text-[10px]">Используйте свой аккаунт</span>
+              <span className="block text-foreground text-sm font-medium">{t.auth.facebook_signin}</span>
+              <span className="block text-muted-foreground text-[10px]">{t.auth.facebook_desc}</span>
             </div>
+          </button>
+
+          {/* Guest button */}
+          <button onClick={handleLogin} className="w-full rounded-2xl border border-border/50 px-5 py-4 text-sm font-medium text-muted-foreground transition-all hover:text-foreground hover:border-primary/30 active:scale-[0.98]">
+            {t.auth.guest_continue}
           </button>
         </div>
 
-        {/* Shimmer divider */}
         <div className="w-full h-px shimmer animate-fade-up" style={{ animationDelay: "0.3s" }} />
 
         <p className="text-muted-foreground text-[10px] text-center max-w-[240px] animate-fade-up leading-relaxed" style={{ animationDelay: "0.35s" }}>
-          Входя, вы соглашаетесь с условиями использования и политикой конфиденциальности
+          {t.auth.terms}
         </p>
       </div>
     </div>

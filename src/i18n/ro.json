@@ -1,0 +1,117 @@
+{
+  "auth": {
+    "welcome": "Bine ați venit",
+    "subtitle": "Asistentul dvs. personal de restaurant cu IA",
+    "google_signin": "Conectare cu Google",
+    "google_desc": "Rapid și sigur",
+    "facebook_signin": "Conectare cu Facebook",
+    "facebook_desc": "Folosiți contul dvs.",
+    "guest_continue": "Continuați ca oaspete",
+    "terms": "Conectându-vă, sunteți de acord cu termenii și condițiile de utilizare"
+  },
+  "chat": {
+    "welcome": "Bine ați venit la La Maison! 🍽️\n\nSunt asistentul dvs. personal. Cu ce vă pot ajuta?\n\n• Vedeți meniul\n• Rezervați o masă\n• Faceți o comandă",
+    "placeholder": "Scrieți un mesaj...",
+    "voice_message": "🎤 Mesaj vocal",
+    "processing": "Procesez cererea dvs...",
+    "typing": "Scrie...",
+    "voice_received": "Am primit mesajul dvs. vocal. Procesez...",
+    "default_reply": "Mulțumesc pentru întrebare! Asistentul nostru va răspunde în curând. 😊"
+  },
+  "live": {
+    "title": "Mod timp real",
+    "heading": "Asistent vocal",
+    "description": "Apăsați microfonul și vorbiți — asistentul va răspunde instant",
+    "listening": "Ascult... Apăsați pentru a opri",
+    "tap_to_start": "Apăsați pentru a începe",
+    "speaking": "Vorbesc...",
+    "ai_assistant": "Asistent AI",
+    "transcription": "Transcriere",
+    "waiting": "Aștept vorbirea..."
+  },
+  "menu": {
+    "title": "Meniu",
+    "search": "Căutare în meniu...",
+    "all": "Toate",
+    "appetizers": "Aperitive",
+    "salads": "Salate",
+    "soups": "Supe",
+    "mains": "Feluri principale",
+    "grill": "Grătar",
+    "desserts": "Deserturi",
+    "drinks": "Băuturi",
+    "hit": "Hit",
+    "new": "Nou",
+    "chef": "Alegerea bucătarului",
+    "add_to_order": "Adaugă la comandă"
+  },
+  "dish": {
+    "description": "Descriere",
+    "ingredients": "Ingrediente",
+    "allergens": "Alergeni",
+    "recommendations": "Se comandă împreună cu",
+    "prep_time": "min",
+    "add_to_order": "Adaugă la comandă"
+  },
+  "cart": {
+    "title": "Comanda dvs.",
+    "table": "Masa",
+    "subtotal": "Subtotal",
+    "service": "Serviciu",
+    "total": "Total",
+    "checkout": "Plasează comanda",
+    "empty": "Coșul este gol",
+    "empty_hint": "Adăugați feluri din meniu",
+    "go_to_menu": "Mergi la meniu",
+    "comment": "Adăugați dorințe la comandă..."
+  },
+  "order": {
+    "confirmed": "Comandă acceptată!",
+    "number": "Număr comandă",
+    "table": "Masa",
+    "wait_time": "Timp estimat",
+    "amount": "Sumă",
+    "waiter_notified": "Chelnerul dvs. a fost notificat. Așteptare plăcută!",
+    "back_to_chat": "Înapoi la chat",
+    "view_menu": "Vedeți meniul"
+  },
+  "loyalty": {
+    "title": "Loialitate",
+    "points": "puncte",
+    "to_next": "Până la următorul nivel",
+    "multiplier": "Multiplicator",
+    "levels": "Niveluri",
+    "recent": "Ultimele acumulări",
+    "rewards": "Recompense disponibile",
+    "claim": "Revendică"
+  },
+  "profile": {
+    "title": "Profil",
+    "guest": "Oaspete",
+    "guest_hint": "Conectați-vă pentru a salva datele",
+    "language": "Limbă",
+    "orders_history": "Istoric comenzi",
+    "favorites": "Favorite",
+    "loyalty": "Loialitate",
+    "notifications": "Notificări",
+    "about": "Despre aplicație",
+    "logout": "Deconectare",
+    "version": "ILAI v1.0"
+  },
+  "common": {
+    "restaurant_name": "La Maison",
+    "slogan": "L'art de bien manger",
+    "ai_assistant": "Asistent IA",
+    "live": "Live",
+    "today": "Astăzi",
+    "yesterday": "Ieri",
+    "currency": "MDL",
+    "back": "Înapoi"
+  },
+  "tabs": {
+    "chat": "Chat",
+    "menu": "Meniu",
+    "cart": "Comandă",
+    "profile": "Profil"
+  }
+}
