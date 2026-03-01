@@ -1,0 +1,117 @@
+{
+  "auth": {
+    "welcome": "Welcome",
+    "subtitle": "Your personal AI restaurant assistant",
+    "google_signin": "Sign in with Google",
+    "google_desc": "Fast and secure",
+    "facebook_signin": "Sign in with Facebook",
+    "facebook_desc": "Use your account",
+    "guest_continue": "Continue as Guest",
+    "terms": "By signing in, you agree to the terms of use and privacy policy"
+  },
+  "chat": {
+    "welcome": "Welcome to La Maison! 🍽️\n\nI'm your personal assistant. How can I help?\n\n• View the menu\n• Book a table\n• Place an order",
+    "placeholder": "Type a message...",
+    "voice_message": "🎤 Voice message",
+    "processing": "Processing your request...",
+    "typing": "Typing...",
+    "voice_received": "Got your voice message. Processing...",
+    "default_reply": "Thanks for your question! Our assistant will respond shortly. 😊"
+  },
+  "live": {
+    "title": "Real-time mode",
+    "heading": "Voice Assistant",
+    "description": "Tap the mic and speak — the assistant will respond instantly",
+    "listening": "Listening... Tap to stop",
+    "tap_to_start": "Tap to start",
+    "speaking": "Speaking...",
+    "ai_assistant": "AI Assistant",
+    "transcription": "Transcription",
+    "waiting": "Waiting for speech..."
+  },
+  "menu": {
+    "title": "Menu",
+    "search": "Search menu...",
+    "all": "All",
+    "appetizers": "Appetizers",
+    "salads": "Salads",
+    "soups": "Soups",
+    "mains": "Mains",
+    "grill": "Grill",
+    "desserts": "Desserts",
+    "drinks": "Drinks",
+    "hit": "Hit",
+    "new": "New",
+    "chef": "Chef's pick",
+    "add_to_order": "Add to order"
+  },
+  "dish": {
+    "description": "Description",
+    "ingredients": "Ingredients",
+    "allergens": "Allergens",
+    "recommendations": "Also ordered with",
+    "prep_time": "min",
+    "add_to_order": "Add to order"
+  },
+  "cart": {
+    "title": "Your Order",
+    "table": "Table",
+    "subtotal": "Subtotal",
+    "service": "Service",
+    "total": "Total",
+    "checkout": "Place Order",
+    "empty": "Cart is empty",
+    "empty_hint": "Add dishes from the menu",
+    "go_to_menu": "Go to menu",
+    "comment": "Add wishes to your order..."
+  },
+  "order": {
+    "confirmed": "Order confirmed!",
+    "number": "Order number",
+    "table": "Table",
+    "wait_time": "Estimated time",
+    "amount": "Amount",
+    "waiter_notified": "Your waiter has been notified. Enjoy the wait!",
+    "back_to_chat": "Back to chat",
+    "view_menu": "View menu"
+  },
+  "loyalty": {
+    "title": "Loyalty",
+    "points": "points",
+    "to_next": "To next level",
+    "multiplier": "Multiplier",
+    "levels": "Levels",
+    "recent": "Recent earnings",
+    "rewards": "Available rewards",
+    "claim": "Claim"
+  },
+  "profile": {
+    "title": "Profile",
+    "guest": "Guest",
+    "guest_hint": "Sign in to save your data",
+    "language": "Language",
+    "orders_history": "Order history",
+    "favorites": "Favorites",
+    "loyalty": "Loyalty",
+    "notifications": "Notifications",
+    "about": "About",
+    "logout": "Sign out",
+    "version": "ILAI v1.0"
+  },
+  "common": {
+    "restaurant_name": "La Maison",
+    "slogan": "L'art de bien manger",
+    "ai_assistant": "AI Assistant",
+    "live": "Live",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "currency": "MDL",
+    "back": "Back"
+  },
+  "tabs": {
+    "chat": "Chat",
+    "menu": "Menu",
+    "cart": "Order",
+    "profile": "Profile"
+  }
+}
