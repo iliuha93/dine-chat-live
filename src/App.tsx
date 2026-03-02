@@ -15,6 +15,7 @@ import CartPage from "./pages/CartPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 import LoyaltyPage from "./pages/LoyaltyPage";
 import ProfilePage from "./pages/ProfilePage";
+import AuthCallbackPage from "./pages/AuthCallbackPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<SplashPage />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/auth/callback" element={<AuthCallbackPage />} />
               <Route path="/chat" element={<ChatPage />} />
               <Route path="/live" element={<RealtimePage />} />
               <Route path="/menu" element={<MenuPage />} />

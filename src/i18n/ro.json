@@ -10,7 +10,7 @@
     "terms": "Conectându-vă, sunteți de acord cu termenii și condițiile de utilizare"
   },
   "chat": {
-    "welcome": "Bine ați venit la La Maison! 🍽️\n\nSunt asistentul dvs. personal. Cu ce vă pot ajuta?\n\n• Vedeți meniul\n• Rezervați o masă\n• Faceți o comandă",
+    "welcome": "Bine ați venit la Liechtensteinhaus! 🏔️\n\nSunt asistentul dvs. personal. Cu ce vă pot ajuta?\n\n• Vedeți meniul\n• Aflați despre preparate\n• Faceți o comandă",
     "placeholder": "Scrieți un mesaj...",
     "voice_message": "🎤 Mesaj vocal",
     "processing": "Procesez cererea dvs...",
@@ -99,13 +99,13 @@
     "version": "ILAI v1.0"
   },
   "common": {
-    "restaurant_name": "La Maison",
-    "slogan": "L'art de bien manger",
+    "restaurant_name": "Liechtensteinhaus",
+    "slogan": "Semmering, seit 1977",
     "ai_assistant": "Asistent IA",
     "live": "Live",
     "today": "Astăzi",
     "yesterday": "Ieri",
-    "currency": "MDL",
+    "currency": "€",
     "back": "Înapoi"
   },
   "tabs": {

@@ -1,19 +1,55 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UtensilsCrossed, Sparkles } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState<"google" | "facebook" | null>(null);
 
-  const handleLogin = () => navigate("/chat");
+  const redirectTo = `${window.location.origin}/auth/callback`;
+
+  const handleGoogleLogin = async () => {
+    setLoading("google");
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo },
+    });
+    if (error) {
+      toast({ title: "Ошибка входа", description: error.message, variant: "destructive" });
+      setLoading(null);
+    }
+  };
+
+  const handleFacebookLogin = async () => {
+    setLoading("facebook");
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "facebook",
+      options: { redirectTo },
+    });
+    if (error) {
+      toast({ title: "Ошибка входа", description: error.message, variant: "destructive" });
+      setLoading(null);
+    }
+  };
+
+  const handleGuestLogin = () => navigate("/chat");
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center bg-background px-6 overflow-hidden">
       <div className="ambient-orb w-72 h-72 bg-primary top-[-5%] left-[-10%]" />
       <div className="ambient-orb w-96 h-96 bg-primary bottom-[-15%] right-[-15%]" />
       <div className="ambient-orb w-48 h-48 bg-destructive top-[60%] left-[10%] opacity-[0.06]" />
+
+      {/* ILAI Services branding — top center */}
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-0.5">
+        <p className="text-muted-foreground/60 text-[9px] tracking-widest uppercase">Powered by</p>
+        <p className="text-muted-foreground text-xs font-semibold tracking-wide">ILAI Services</p>
+      </div>
 
       {/* Language switcher */}
       <div className="absolute top-4 right-4 z-20">
@@ -26,14 +62,11 @@ const LoginPage = () => {
       <div className="relative z-10 w-full max-w-sm flex flex-col items-center gap-10">
         {/* Logo */}
         <div className="flex flex-col items-center gap-4 animate-fade-up">
-          <div className="relative">
-            <div className="w-24 h-24 rounded-full gold-gradient flex items-center justify-center shadow-xl glow-pulse">
-              <UtensilsCrossed className="w-11 h-11 text-primary-foreground" />
-            </div>
-            <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-card border border-border flex items-center justify-center">
-              <Sparkles className="w-3.5 h-3.5 text-primary" />
-            </div>
-          </div>
+          <img
+            src="/Liechtensteinhaus_Logo.png"
+            alt="Liechtensteinhaus"
+            className="w-28 h-28 object-contain drop-shadow-xl"
+          />
           <div className="text-center space-y-1.5">
             <h1 className="text-4xl font-bold gold-text tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
               {t.common.restaurant_name}
@@ -52,28 +85,44 @@ const LoginPage = () => {
         </div>
 
         <div className="w-full flex flex-col gap-3 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-          <button onClick={handleLogin} className="group w-full flex items-center gap-3 rounded-2xl glass-card-strong px-5 py-4 text-sm font-medium text-foreground transition-all hover:border-primary/30 active:scale-[0.98] hover:shadow-lg hover:shadow-primary/5">
+          <button
+            onClick={handleGoogleLogin}
+            disabled={loading !== null}
+            className="group w-full flex items-center gap-3 rounded-2xl glass-card-strong px-5 py-4 text-sm font-medium text-foreground transition-all hover:border-primary/30 active:scale-[0.98] hover:shadow-lg hover:shadow-primary/5 disabled:opacity-60 disabled:pointer-events-none"
+          >
             <div className="w-10 h-10 rounded-xl bg-card flex items-center justify-center border border-border group-hover:border-primary/20 transition-colors">
-              <GoogleIcon />
+              {loading === "google" ? <Spinner /> : <GoogleIcon />}
             </div>
             <div className="text-left">
-              <span className="block text-foreground text-sm font-medium">{t.auth.google_signin}</span>
+              <span className="block text-foreground text-sm font-medium">
+                {loading === "google" ? "Подключаемся..." : t.auth.google_signin}
+              </span>
               <span className="block text-muted-foreground text-[10px]">{t.auth.google_desc}</span>
             </div>
           </button>
 
-          <button onClick={handleLogin} className="group w-full flex items-center gap-3 rounded-2xl glass-card-strong px-5 py-4 text-sm font-medium text-foreground transition-all hover:border-primary/30 active:scale-[0.98] hover:shadow-lg hover:shadow-primary/5">
+          <button
+            onClick={handleFacebookLogin}
+            disabled={loading !== null}
+            className="group w-full flex items-center gap-3 rounded-2xl glass-card-strong px-5 py-4 text-sm font-medium text-foreground transition-all hover:border-primary/30 active:scale-[0.98] hover:shadow-lg hover:shadow-primary/5 disabled:opacity-60 disabled:pointer-events-none"
+          >
             <div className="w-10 h-10 rounded-xl bg-card flex items-center justify-center border border-border group-hover:border-primary/20 transition-colors">
-              <FacebookIcon />
+              {loading === "facebook" ? <Spinner /> : <FacebookIcon />}
             </div>
             <div className="text-left">
-              <span className="block text-foreground text-sm font-medium">{t.auth.facebook_signin}</span>
+              <span className="block text-foreground text-sm font-medium">
+                {loading === "facebook" ? "Подключаемся..." : t.auth.facebook_signin}
+              </span>
               <span className="block text-muted-foreground text-[10px]">{t.auth.facebook_desc}</span>
             </div>
           </button>
 
           {/* Guest button */}
-          <button onClick={handleLogin} className="w-full rounded-2xl border border-border/50 px-5 py-4 text-sm font-medium text-muted-foreground transition-all hover:text-foreground hover:border-primary/30 active:scale-[0.98]">
+          <button
+            onClick={handleGuestLogin}
+            disabled={loading !== null}
+            className="w-full rounded-2xl border border-border/50 px-5 py-4 text-sm font-medium text-muted-foreground transition-all hover:text-foreground hover:border-primary/30 active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none"
+          >
             {t.auth.guest_continue}
           </button>
         </div>
@@ -84,15 +133,17 @@ const LoginPage = () => {
           {t.auth.terms}
         </p>
 
-        {/* ILAI Services branding */}
-        <div className="animate-fade-up flex flex-col items-center gap-1 mt-2" style={{ animationDelay: "0.4s" }}>
-          <p className="text-muted-foreground/60 text-[9px] tracking-widest uppercase">Powered by</p>
-          <p className="text-muted-foreground text-xs font-semibold tracking-wide">ILAI Services</p>
-        </div>
       </div>
     </div>
   );
 };
+
+const Spinner = () => (
+  <svg className="animate-spin w-5 h-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+  </svg>
+);
 
 const GoogleIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24">

@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { UtensilsCrossed, Sparkles } from "lucide-react";
 
 const SplashPage = () => {
   const navigate = useNavigate();
@@ -16,21 +15,20 @@ const SplashPage = () => {
       <div className="ambient-orb w-96 h-96 bg-primary bottom-[-15%] right-[-15%]" />
 
       <div className="relative z-10 flex flex-col items-center gap-6 animate-fade-up">
-        <div className="relative" style={{ animation: "fade-in 0.6s ease-out, scale-in 0.6s ease-out" }}>
-          <div className="w-24 h-24 rounded-full gold-gradient flex items-center justify-center shadow-xl">
-            <UtensilsCrossed className="w-11 h-11 text-primary-foreground" />
-          </div>
-          <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-card border border-border flex items-center justify-center">
-            <Sparkles className="w-3.5 h-3.5 text-primary" />
-          </div>
+        <div style={{ animation: "fade-in 0.6s ease-out, scale-in 0.6s ease-out" }}>
+          <img
+            src="/Liechtensteinhaus_Logo.png"
+            alt="Liechtensteinhaus"
+            className="w-28 h-28 object-contain drop-shadow-xl"
+          />
         </div>
 
         <div className="text-center space-y-1.5">
           <h1 className="text-[40px] font-bold gold-text tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
-            La Maison
+            Liechtensteinhaus
           </h1>
           <p className="text-muted-foreground text-sm italic" style={{ fontFamily: "var(--font-elegant)" }}>
-            L'art de bien manger
+            Semmering, seit 1977
           </p>
         </div>
 
