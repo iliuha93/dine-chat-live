@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Search, Filter, Heart } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { dishes, Dish } from "@/data/menuData";
+import { dishes, Dish, getDishImage } from "@/data/menuData";
+import { useDishPhotos } from "@/hooks/useDishPhotos";
 import BottomTabBar from "@/components/BottomTabBar";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
@@ -14,10 +15,13 @@ const getDishDesc = (d: Dish, lang: string) => lang === "RO" ? d.descriptionRo :
 const MenuPage = () => {
   const navigate = useNavigate();
   const { t, lang } = useLanguage();
+  const { photoMap } = useDishPhotos();
   const [active, setActive] = useState("all");
   const [searchOpen, setSearchOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+
+  const resolveImage = (dish: Dish) => photoMap.get(dish.id) ?? getDishImage(dish);
 
   const catLabel = (c: string) => (t.menu as Record<string, string>)[c] || c;
 
@@ -98,7 +102,7 @@ const MenuPage = () => {
               className="glass-card rounded-2xl overflow-hidden text-left transition-all active:scale-[0.98]"
             >
               <div className="relative">
-                <img src={dish.image} alt={getDishName(dish, lang)} className="w-full h-[140px] object-cover" loading="lazy" />
+                <img src={resolveImage(dish)} alt={getDishName(dish, lang)} className="w-full h-[140px] object-cover" loading="lazy" />
                 {dish.badge && (
                   <span className="absolute top-2 right-2 bg-primary/90 text-primary-foreground text-[10px] font-bold px-2.5 py-1 rounded-full">
                     {badgeLabel(dish.badge)}

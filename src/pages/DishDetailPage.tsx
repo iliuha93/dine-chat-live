@@ -1,21 +1,30 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Heart, Clock, Minus, Plus, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Heart, Clock, Minus, Plus, AlertTriangle, Camera } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { dishes, Dish } from "@/data/menuData";
+import { dishes, Dish, getDishImage } from "@/data/menuData";
 import { useCart } from "@/store/CartContext";
+import { useDishPhotos } from "@/hooks/useDishPhotos";
+import PhotoUploadModal from "@/components/PhotoUploadModal";
 import { toast } from "sonner";
 
 const getDishName = (d: Dish, lang: string) => lang === "RO" ? d.nameRo : lang === "EN" ? d.nameEn : d.name;
 const getDishDesc = (d: Dish, lang: string) => lang === "RO" ? d.descriptionRo : lang === "EN" ? d.descriptionEn : d.description;
+
+// Show the photo edit button when the URL contains ?owner=1 or localStorage flag is set
+const isOwnerMode = () =>
+  new URLSearchParams(window.location.search).get("owner") === "1" ||
+  localStorage.getItem("ilai_owner_mode") === "1";
 
 const DishDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t, lang } = useLanguage();
   const { addItem } = useCart();
+  const { photoMap, upsertPhoto } = useDishPhotos();
   const [qty, setQty] = useState(1);
   const [fav, setFav] = useState(false);
+  const [photoModalOpen, setPhotoModalOpen] = useState(false);
 
   const dish = dishes.find((d) => d.id === id);
   if (!dish) return <div className="flex items-center justify-center h-screen bg-background text-foreground">Not found</div>;
@@ -23,26 +32,68 @@ const DishDetailPage = () => {
   const name = getDishName(dish, lang);
   const desc = getDishDesc(dish, lang);
 
+  // Custom photo from Supabase takes priority over static image
+  const resolvedImage = photoMap.get(dish.id) ?? getDishImage(dish);
+
   const handleAdd = () => {
     for (let i = 0; i < qty; i++) {
-      addItem({ id: dish.id, name, price: dish.price, image: dish.image });
+      addItem({ id: dish.id, name, price: dish.price, image: resolvedImage });
     }
     toast.success(`${name} x${qty} добавлено`);
     navigate(-1);
+  };
+
+  const handleSavePhoto = async (photoUrl: string, source: "upload" | "ai_generated") => {
+    await upsertPhoto(dish.id, photoUrl, source);
+    toast.success("Фото обновлено");
   };
 
   return (
     <div className="relative flex flex-col h-screen bg-background max-w-md mx-auto overflow-hidden">
       {/* Image */}
       <div className="relative">
-        <img src={dish.image} alt={name} className="w-full h-[250px] object-cover" style={{ borderRadius: "0 0 24px 24px" }} />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" style={{ borderRadius: "0 0 24px 24px" }} />
-        <button onClick={() => navigate(-1)} className="absolute top-4 left-4 w-10 h-10 rounded-full glass-card flex items-center justify-center">
+        <img
+          src={resolvedImage}
+          alt={name}
+          className="w-full h-[250px] object-cover"
+          style={{ borderRadius: "0 0 24px 24px" }}
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"
+          style={{ borderRadius: "0 0 24px 24px" }}
+        />
+        <button
+          onClick={() => navigate(-1)}
+          className="absolute top-4 left-4 w-10 h-10 rounded-full glass-card flex items-center justify-center"
+        >
           <ArrowLeft className="w-5 h-5 text-foreground" />
         </button>
-        <button onClick={() => setFav(!fav)} className="absolute top-4 right-4 w-10 h-10 rounded-full glass-card flex items-center justify-center">
-          <Heart className={`w-5 h-5 ${fav ? "fill-primary text-primary" : "text-foreground"}`} />
-        </button>
+
+        <div className="absolute top-4 right-4 flex items-center gap-2">
+          {/* Owner: edit photo button */}
+          {isOwnerMode() && (
+            <button
+              onClick={() => setPhotoModalOpen(true)}
+              className="w-10 h-10 rounded-full glass-card flex items-center justify-center"
+              title="Изменить фото блюда"
+            >
+              <Camera className="w-5 h-5 text-primary" />
+            </button>
+          )}
+          <button
+            onClick={() => setFav(!fav)}
+            className="w-10 h-10 rounded-full glass-card flex items-center justify-center"
+          >
+            <Heart className={`w-5 h-5 ${fav ? "fill-primary text-primary" : "text-foreground"}`} />
+          </button>
+        </div>
+
+        {/* AI-generated badge */}
+        {photoMap.has(dish.id) && (
+          <span className="absolute bottom-4 left-4 text-[10px] font-semibold bg-black/50 text-white px-2 py-1 rounded-full">
+            Кастомное фото
+          </span>
+        )}
       </div>
 
       {/* Content */}
@@ -107,6 +158,16 @@ const DishDetailPage = () => {
           {t.dish.add_to_order} — {dish.price * qty} {t.common.currency}
         </button>
       </div>
+
+      {/* Photo upload modal */}
+      {photoModalOpen && (
+        <PhotoUploadModal
+          dish={dish}
+          currentPhoto={resolvedImage}
+          onSave={handleSavePhoto}
+          onClose={() => setPhotoModalOpen(false)}
+        />
+      )}
     </div>
   );
 };

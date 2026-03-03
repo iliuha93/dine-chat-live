@@ -9,12 +9,15 @@ export interface Dish {
   price: number;
   category: string;
   image: string;
+  customImage?: string;
   badge?: "hit" | "new" | "chef";
   prepTime: number;
   weight: string;
   ingredients: string[];
   allergens?: string[];
 }
+
+export const getDishImage = (dish: Dish): string => dish.customImage ?? dish.image;
 
 export const dishes: Dish[] = [
   // ─── DRINKS ───────────────────────────────────────────────────────────────
